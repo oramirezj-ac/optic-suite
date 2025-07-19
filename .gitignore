@@ -1,0 +1,20 @@
+# Obsidian
+# Ignora la carpeta de configuración personal de tu bóveda de documentación.
+docs/.obsidian/
+
+# Dependencias de PHP (Composer)
+# Si en el futuro usas Composer, esto ignorará la carpeta de librerías.
+/vendor/
+
+# Dependencias de JavaScript (Node.js)
+# Si en el futuro usas herramientas de JS, esto ignorará los paquetes.
+/node_modules/
+
+# Archivo de Entorno
+# Contendrá contraseñas de la base de datos y otras claves. ¡NUNCA debe subirse!
+.env
+
+# Archivos de Sistema Operativo y Editor
+.DS_Store
+Thumbs.db
+.vscode/
