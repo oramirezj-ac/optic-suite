@@ -1,0 +1,517 @@
+/* Variables de Color */
+:root {
+    --color-primario: #007bff;
+    --color-fondo: #f4f7f6;
+    --color-sidebar: #ffffff;
+    --color-texto: #333;
+    --color-borde: #dee2e6;
+}
+
+/* Reseteo Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* Layout Principal */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    background-color: var(--color-sidebar);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.header__logo h1 {
+    font-size: 1.5rem;
+    color: var(--color-primario);
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 220px 1fr; /* Sidebar y contenido */
+    min-height: calc(100vh - 61px); /* Resto de la altura */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--color-sidebar);
+    padding: 1rem;
+    border-right: 1px solid var(--color-borde);
+}
+
+.sidebar__nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-texto);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.sidebar__nav a:hover {
+    background-color: var(--color-fondo);
+}
+
+.sidebar__nav a.activo {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+/* Contenido Principal */
+.contenido-principal {
+    padding: 2rem;
+}
+
+.contenido-principal h2 {
+    margin-bottom: 1rem;
+}
+
+/* Widgets del Dashboard */
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.widget {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+}
+
+.widget h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.widget__numero {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+/* --- Estilos para Formularios --- */
+.formulario-container {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+}
+
+/* Habilitamos el diseño de Grid */
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas */
+    gap: 1.5rem;
+}
+
+/* Hacemos que un campo ocupe las 2 columnas */
+.formulario-grid .campo-full-width {
+    grid-column: 1 / -1;
+}
+
+.formulario-grid label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.formulario-grid input[type="text"],
+.formulario-grid input[type="date"],
+.formulario-grid input[type="tel"],
+.formulario-grid input[type="email"],
+.formulario-grid textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.formulario-grid .campo-checkbox {
+    display: flex;
+    align-items: center;
+}
+.formulario-grid .campo-checkbox input {
+    margin-right: 0.5rem;
+    width: auto; /* Ancho automático para el checkbox */
+}
+.formulario-grid .campo-checkbox label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* --- Estilos para Tablas --- */
+.tabla-container {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    overflow-x: auto; /* Para que la tabla sea responsive en pantallas pequeñas */
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-borde);
+    text-align: left;
+}
+
+.tabla thead th {
+    background-color: var(--color-fondo);
+    font-weight: bold;
+}
+
+.tabla tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+
+/* --- Alertas --- */
+.alerta {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+.alerta.exito {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}   
+
+/* --- Estilos para Página de Confirmación --- */
+.confirmacion-container {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+    text-align: center;
+}
+
+/* Icono de Confirmación (Tamaño Reducido) */
+.confirmacion-icono svg {
+    width: 60px; /* Reducimos el tamaño */
+    height: 60px;
+    color: #28a745; 
+}
+
+.confirmacion-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.confirmacion-container p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 2.5rem; /* Aumentamos el espacio */
+}
+
+/* Contenedor de Acciones (Botones) */
+.confirmacion-acciones {
+    display: flex; /* Usamos Flexbox para alinear */
+    justify-content: center; /* Centramos los botones */
+    gap: 1rem; /* Espacio entre botones */
+}
+
+/* Estilo Base para TODOS los Botones */
+.boton {
+    padding: 0.8rem 1.6rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+}
+
+/* Botón Primario */
+.boton-primario {
+    background-color: var(--color-primario);
+    color: white;
+    border-color: var(--color-primario);
+}
+.boton-primario:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Botón Secundario (Nuevo diseño "outline") */
+.boton-secundario {
+    background-color: transparent;
+    color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+.boton-secundario:hover {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+/* --- Estilos de Cabecera de Página --- */
+.pagina-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* --- Estilos para la Sección de Recientes --- */
+.contenido-principal h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 0.5rem;
+}
+
+.recientes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.reciente-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--color-borde);
+    font-weight: 500;
+}
+
+/* --- Estilos para Acciones de Formulario --- */
+.formulario-acciones {
+    display: flex;
+    justify-content: space-between; /* Alinea los botones a los extremos */
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.acciones-grupo-izquierda {
+    display: flex;
+    gap: 1rem; /* Espacio entre el botón Guardar y Cancelar */
+}
+
+/* --- Estilos para Página de Confirmación de Borrado --- */
+.confirmacion-icono-alerta svg {
+    width: 60px;
+    height: 60px;
+    color: #dc3545; /* Rojo de alerta/borrado */
+}
+
+.alerta-permanente {
+    font-weight: bold;
+    color: #dc3545;
+}
+
+/* --- Estilos para Formulario de Graduación --- */
+.formulario-graduacion {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr 1fr 1fr;
+    gap: 1rem 1.5rem;
+    align-items: center; 
+}
+
+.formulario-graduacion .campo-full-width {
+    grid-column: 1 / -1;
+}
+
+.formulario-graduacion .graduacion-ojo {
+    font-size: 1.5rem; /* Reducimos el tamaño de OD y OI */
+    font-weight: bold;
+    text-align: right;
+}
+
+.formulario-graduacion label {
+    font-weight: normal;
+    font-size: 1rem; /* Aumentamos el tamaño de las etiquetas (Esfera, Cilindro, etc.) */
+}
+
+/* --- Estilos para Acciones de Graduación en Tabla --- */
+.acciones-verticales {
+    vertical-align: middle; /* Centra verticalmente el contenido */
+    text-align: center; /* Centra horizontalmente el contenido */
+}
+
+.acciones-grupo {
+    display: inline-flex; /* Usa inline-flex para que el contenedor se ajuste a los botones */
+    gap: 0.5rem;
+}
+
+.acciones-verticales .boton,
+.acciones-verticales .boton-borrar {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.acciones-verticales form {
+    margin: 0;
+}
+
+/* --- Estilos para Valores de Graduación en Tabla --- */
+.graduacion-valores {
+    display: flex;
+    gap: 0.5rem; /* Espacio entre las cajas */
+}
+
+.graduacion-valores .valor {
+    display: inline-block;
+    min-width: 60px; /* Ancho mínimo de cada caja */
+    padding: 0.4rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    text-align: center;
+    background-color: var(--color-fondo);
+}
+
+.th-valores-contenido {
+    display: flex;
+    justify-content: space-around;
+    width: 55%; /* El contenido ocupa el 70% del espacio */
+}
+
+/* --- Estilos para Formulario de Captura de Graduación --- */
+.formulario-graduacion-captura {
+    display: grid;
+    grid-template-columns: 60px 1fr; /* 2 columnas: etiqueta y cajas */
+    gap: 1rem;
+    align-items: center;
+}
+
+.formulario-graduacion-captura .campo-full-width {
+    grid-column: 1 / -1;
+}
+
+/* Ajusta los inputs para que se vean como las cajas */
+.formulario-graduacion-captura .graduacion-valores .valor {
+    width: 100%; /* El input ocupa el 100% de la caja */
+    max-width: 90px; /* Limita el ancho máximo de cada caja */
+    box-sizing: border-box; /* Asegura que el padding y borde no afecten el ancho */
+    font-size: 1.1rem; /* Aumenta el tamaño de la fuente */
+}
+
+.subtitulo-pagina {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-top: -0.5rem; /* Reducimos el margen superior */
+    margin-bottom: 2rem;
+}
+
+/* --- Estilos para Agudeza Visual --- */
+.agudeza-visual-grupo {
+    display: flex;
+    gap: 1rem; /* Espacio entre los campos */
+}
+
+.av-campo {
+    flex-grow: 1; /* Permite que los campos crezcan por igual */
+}
+
+.av-campo select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* --- Estilos para Filtro Alfabético --- */
+.filtro-alfabetico {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+}
+
+.filtro-alfabetico a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--color-primario);
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.filtro-alfabetico a:hover {
+    background-color: #e9ecef;
+}
+
+.filtro-alfabetico a.activo {
+    background-color: var(--color-primario);
+    color: white;
+    border-color: var(--color-primario);
+}
+
+/* --- Estilos para Botones de Acciones Pequeños (en tablas) --- */
+.boton.boton-ver,
+.boton.boton-editar,
+.boton.boton-borrar {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+    margin-right: 4px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.boton-ver {
+    background-color: #17a2b8; /* Azul turquesa */
+}
+
+.boton-editar {
+    background-color: #28a745; /* Verde */
+}
+
+.boton-borrar {
+    background-color: #dc3545; /* Rojo */
+}
+
+/* --- Estilos UNIFICADOS para Contenedores de Acciones --- */
+.confirmacion-acciones,
+.formulario-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.confirmacion-acciones form,
+.formulario-acciones form {
+    margin: 0;
+    display: contents; /* Esta es la línea clave */
+}
+
+.acciones-grupo-izquierda {
+    display: flex;
+    gap: 1rem;
+}
+
+/* En la página de confirmación no he encontrado la falla que hace que un boton sea más grande que el otro, queda pendiente */
