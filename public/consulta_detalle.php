@@ -35,64 +35,55 @@ require_once '../src/layouts/sidebar.php';
             <h2>Detalle de Consulta del <?php echo htmlspecialchars($consulta['fecha_consulta']); ?></h2>
             <p class="subtitulo-pagina">Paciente: <strong><?php echo htmlspecialchars($nombre_completo); ?></strong></p>
         </div>
-        <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton-secundario">
+        <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario">
             &larr; Regresar al Historial
         </a>
     </div>
     <h3>Graduaciones Registradas</h3>
-    <div class="tabla-container">
-        <table class="tabla">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Ojo</th>
-                    <th class="th-valores">
-                        <div class="th-valores-contenido">
-                            <span>Esfera</span>
-                            <span>Cilindro</span>
-                            <span>Eje</span>
-                            <span>Add</span>
-                        </div>
-                    </th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($graduaciones as $graduacion): ?>
-                    <tr>
-                        <td rowspan="2"><strong><?php echo htmlspecialchars($graduacion['tipo_graduacion']); ?></strong></td>
-                        <td class="graduacion-ojo-label">OD</td>
-                        <td class="graduacion-valores">
+
+    <div class="lista-graduaciones">
+        <?php if (empty($graduaciones)): ?>
+            <p>No hay graduaciones registradas para esta consulta.</p>
+        <?php else: ?>
+            <?php foreach ($graduaciones as $graduacion): ?>
+                <div class="graduacion-fila">
+                    <div class="graduacion-columna-tipo">
+                        <strong><?php echo htmlspecialchars($graduacion['tipo_graduacion']); ?></strong>
+                    </div>
+
+                    <div class="graduacion-columna-formulas">
+                        <div class="graduacion-formula">
+                            <span class="graduacion-ojo-label">OD</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['od_esfera']); ?></span>
+                            <span class="simbolo">=</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['od_cilindro']); ?></span>
+                            <span class="simbolo">x</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['od_eje']); ?></span>
-                            <span class="valor"><?php echo htmlspecialchars($graduacion['od_add']); ?></span>
-                        </td>
-                        <td rowspan="2" class="acciones-verticales">
-                            <div class="acciones-grupo">
-                                <a href="/graduacion_editar.php?id_graduacion=<?php echo $graduacion['id_graduacion']; ?>" class="boton boton-editar">Editar</a>
-                                <a href="/graduacion_confirmar_borrado.php?id=<?php echo $graduacion['id_graduacion']; ?>" class="boton boton-borrar">Borrar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="graduacion-ojo-label">OI</td>
-                        <td class="graduacion-valores">
+                            <span class="simbolo">°</span>
+                            <span class="valor valor-add"><?php echo htmlspecialchars($graduacion['od_add']); ?></span>
+                        </div>
+                        <div class="graduacion-formula">
+                            <span class="graduacion-ojo-label">OI</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['oi_esfera']); ?></span>
+                            <span class="simbolo">=</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['oi_cilindro']); ?></span>
+                            <span class="simbolo">x</span>
                             <span class="valor"><?php echo htmlspecialchars($graduacion['oi_eje']); ?></span>
-                            <span class="valor"><?php echo htmlspecialchars($graduacion['oi_add']); ?></span>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                <?php if (empty($graduaciones)): ?>
-                    <tr>
-                        <td colspan="4">No hay graduaciones registradas para esta consulta.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+                            <span class="simbolo">°</span>
+                            <span class="valor valor-add"><?php echo htmlspecialchars($graduacion['oi_add']); ?></span>
+                        </div>
+                    </div>
+
+                    <div class="graduacion-columna-acciones">
+                        <a href="/graduacion_editar.php?id_graduacion=<?php echo $graduacion['id_graduacion']; ?>" class="boton boton--exito boton--md">Editar</a>
+                        <a href="/graduacion_confirmar_borrado.php?id=<?php echo $graduacion['id_graduacion']; ?>" class="boton boton--peligro boton--md">Borrar</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
+
+
     
     <div class="formulario-container">
         <h3>Registrar Nueva Graduación</h3>
@@ -100,7 +91,7 @@ require_once '../src/layouts/sidebar.php';
             <input type="hidden" name="id_consulta" value="<?php echo htmlspecialchars($id_consulta); ?>">
             <input type="hidden" name="id_paciente" value="<?php echo htmlspecialchars($id_paciente); ?>">
 
-            <div class="campo-full-width">
+            <div class="campo-full-width campo-tipo-graduacion">
                 <label for="tipo_graduacion">Tipo de Graduación:</label>
                 <select id="tipo_graduacion" name="tipo_graduacion">
                     <option value="Final">Final</option>
@@ -127,7 +118,7 @@ require_once '../src/layouts/sidebar.php';
             </div>
 
             <div class="campo-full-width">
-                <button type="submit" class="boton boton-primario">Guardar Graduación</button>
+                <button type="submit" class="boton boton--primario boton--md">Guardar Graduación</button>
             </div>
         </form>
     </div>

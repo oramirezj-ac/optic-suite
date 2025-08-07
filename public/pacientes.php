@@ -5,8 +5,8 @@ require_once '../src/database.php';
 $abecedario = range('A', 'Z');
 $letra_seleccionada = $_GET['letra'] ?? null;
 
-// --- Consulta a la Base de Datos (Ahora es dinámica) ---
-$sql_todos = "SELECT id_paciente, nombres, apellido_paterno, apellido_materno, telefono, dp_total FROM pacientes";
+// --- Consulta a la Base de Datos (Modificada) ---
+$sql_todos = "SELECT id_paciente, nombres, apellido_paterno, apellido_materno, fecha_nacimiento FROM pacientes";
 $params = [];
 
 if ($letra_seleccionada) {
@@ -27,9 +27,12 @@ require_once '../src/layouts/sidebar.php';
 
 <main class="contenido-principal">
     <div class="pagina-header">
-        <h2>Gestión de Pacientes</h2>
-        <a href="/pacientes_nuevo.php" class="boton boton-primario">+ Agregar Nuevo Paciente</a>
+    <h2>Gestión de Pacientes</h2>
+    <div class="acciones-grupo-izquierda">
+        <a href="/paciente_buscar.php" class="boton boton--secundario">Buscar Paciente</a>
+        <a href="/pacientes_nuevo.php" class="boton boton--primario">+ Agregar Nuevo Paciente</a>
     </div>
+</div>
 
     <h3>Filtrar por Apellido</h3>
     <div class="filtro-alfabetico">
@@ -58,8 +61,7 @@ require_once '../src/layouts/sidebar.php';
                     <th>Nombres</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
-                    <th>Teléfono</th>
-                    <th>DP Total</th>
+                    <th>Edad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -69,18 +71,26 @@ require_once '../src/layouts/sidebar.php';
                         <td><?php echo htmlspecialchars($paciente['nombres']); ?></td>
                         <td><?php echo htmlspecialchars($paciente['apellido_paterno']); ?></td>
                         <td><?php echo htmlspecialchars($paciente['apellido_materno']); ?></td>
-                        <td><?php echo htmlspecialchars($paciente['telefono']); ?></td>
-                        <td><?php echo htmlspecialchars($paciente['dp_total']); ?></td>
+                        <td class="edad-paciente">
+                            <?php
+                                if ($paciente['fecha_nacimiento']) {
+                                    $fecha_nac = new DateTime($paciente['fecha_nacimiento']);
+                                    $hoy = new DateTime();
+                                    $edad = $hoy->diff($fecha_nac)->y;
+                                    echo $edad . ' años';
+                                } else {
+                                    echo 'N/A';
+                                }
+                            ?>
+                        </td>
                         <td>
-                            <a href="/consulta_historial.php?id=<?php echo $paciente['id_paciente']; ?>" class="boton boton-ver">Ver Consultas</a>
-                            <a href="/pacientes_editar.php?id=<?php echo $paciente['id_paciente']; ?>" class="boton boton-editar">Editar</a>
-                            <a href="/paciente_confirmar_borrado.php?id=<?php echo $paciente['id_paciente']; ?>" class="boton boton-borrar">Borrar</a>
+                            <a href="/paciente_detalle.php?id=<?php echo $paciente['id_paciente']; ?>" class="boton boton--primario boton--sm">Revisar Información</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                  <?php if (empty($pacientes_todos)): ?>
                     <tr>
-                        <td colspan="6">No se encontraron pacientes con ese criterio.</td>
+                        <td colspan="5">No se encontraron pacientes con ese criterio.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

@@ -1,18 +1,20 @@
-/* Variables de Color */
+/* ==========================================================================
+   1. Variables y Estilos Globales
+   ========================================================================== */
 :root {
     --color-primario: #007bff;
+    --color-secundario: #6c757d;
+    --color-exito: #28a745;
+    --color-peligro: #dc3545;
+    --color-aviso: #ffc107;
+    --color-info: #17a2b8;
     --color-fondo: #f4f7f6;
-    --color-sidebar: #ffffff;
+    --color-blanco: #ffffff;
     --color-texto: #333;
     --color-borde: #dee2e6;
 }
 
-/* Reseteo Básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -20,30 +22,26 @@ body {
     color: var(--color-texto);
 }
 
-/* Layout Principal */
+/* ==========================================================================
+   2. Layout Principal
+   ========================================================================== */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 2rem;
-    background-color: var(--color-sidebar);
+    background-color: var(--color-blanco);
     border-bottom: 1px solid var(--color-borde);
-}
-
-.header__logo h1 {
-    font-size: 1.5rem;
-    color: var(--color-primario);
 }
 
 .app-container {
     display: grid;
-    grid-template-columns: 220px 1fr; /* Sidebar y contenido */
-    min-height: calc(100vh - 61px); /* Resto de la altura */
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 61px);
 }
 
-/* Sidebar */
 .sidebar {
-    background-color: var(--color-sidebar);
+    background-color: var(--color-blanco);
     padding: 1rem;
     border-right: 1px solid var(--color-borde);
 }
@@ -58,69 +56,79 @@ body {
     transition: background-color 0.2s;
 }
 
-.sidebar__nav a:hover {
-    background-color: var(--color-fondo);
+.sidebar__nav a:hover { background-color: var(--color-fondo); }
+.sidebar__nav a.activo { background-color: var(--color-primario); color: var(--color-blanco); }
+
+.contenido-principal { padding: 2rem; }
+
+.pagina-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
-.sidebar__nav a.activo {
-    background-color: var(--color-primario);
-    color: white;
-}
+.subtitulo-pagina { font-size: 1.1rem; color: var(--color-secundario); margin-top: -0.5rem; }
+.paciente-titulo h3 { font-size: 1.8rem; font-weight: 600; }
 
-/* Contenido Principal */
-.contenido-principal {
-    padding: 2rem;
-}
-
-.contenido-principal h2 {
-    margin-bottom: 1rem;
-}
-
-/* Widgets del Dashboard */
-.dashboard-widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.widget {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-borde);
-}
-
-.widget h3 {
+/* ==========================================================================
+   3. Botones (Sistema Base + Modificadores)
+   ========================================================================== */
+.boton {
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    margin-bottom: 1rem;
-}
-
-.widget__numero {
-    font-size: 2rem;
     font-weight: bold;
-    color: var(--color-primario);
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
-/* --- Estilos para Formularios --- */
+.boton--primario { background-color: var(--color-primario); border-color: var(--color-primario); color: var(--color-blanco); }
+.boton--primario:hover { background-color: #0069d9; border-color: #0062cc; }
+
+.boton--secundario { background-color: var(--color-secundario); border-color: var(--color-secundario); color: var(--color-blanco); }
+.boton--secundario:hover { background-color: #5a6268; border-color: #545b62; }
+
+.boton--peligro { background-color: var(--color-peligro); border-color: var(--color-peligro); color: var(--color-blanco); }
+.boton--peligro:hover { background-color: #c82333; border-color: #bd2130; }
+
+.boton--exito { background-color: var(--color-exito); border-color: var(--color-exito); color: var(--color-blanco); }
+.boton--info { background-color: var(--color-info); border-color: var(--color-info); color: var(--color-blanco); }
+
+.boton--sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: normal;
+    /* No se especifica border-radius para que herede el del .boton base */
+}
+
+.boton--md {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   4. Formularios
+   ========================================================================== */
 .formulario-container {
     margin-top: 2rem;
-    background-color: white;
+    background-color: var(--color-blanco);
     padding: 2rem;
     border-radius: 8px;
-    border: 1px solid var(--color-borde);
 }
 
-/* Habilitamos el diseño de Grid */
 .formulario-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas */
+    grid-template-columns: repeat(3, 1fr); /* CORRECCIÓN: Vuelve a 3 columnas */
     gap: 1.5rem;
 }
-
-/* Hacemos que un campo ocupe las 2 columnas */
-.formulario-grid .campo-full-width {
-    grid-column: 1 / -1;
+.formulario-grid .campo-full-width { 
+    grid-column: 1 / -1; 
 }
 
 .formulario-grid label {
@@ -129,11 +137,9 @@ body {
     font-weight: bold;
 }
 
-.formulario-grid input[type="text"],
-.formulario-grid input[type="date"],
-.formulario-grid input[type="tel"],
-.formulario-grid input[type="email"],
-.formulario-grid textarea {
+.formulario-grid input,
+.formulario-grid textarea,
+.formulario-grid select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--color-borde);
@@ -141,291 +147,24 @@ body {
     font-size: 1rem;
 }
 
-.formulario-grid .campo-checkbox {
-    display: flex;
-    align-items: center;
-}
-.formulario-grid .campo-checkbox input {
-    margin-right: 0.5rem;
-    width: auto; /* Ancho automático para el checkbox */
-}
-.formulario-grid .campo-checkbox label {
-    margin-bottom: 0;
-    font-weight: normal;
-}
-
-/* --- Estilos para Tablas --- */
-.tabla-container {
-    margin-top: 2rem;
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-borde);
-    overflow-x: auto; /* Para que la tabla sea responsive en pantallas pequeñas */
-}
-
-.tabla {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tabla th, .tabla td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--color-borde);
-    text-align: left;
-}
-
-.tabla thead th {
-    background-color: var(--color-fondo);
-    font-weight: bold;
-}
-
-.tabla tbody tr:hover {
-    background-color: #f8f9fa;
-}
-
-
-/* --- Alertas --- */
-.alerta {
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border-radius: 5px;
-    border: 1px solid transparent;
-}
-
-.alerta.exito {
-    color: #155724;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-}   
-
-/* --- Estilos para Página de Confirmación --- */
-.confirmacion-container {
-    margin-top: 2rem;
-    background-color: white;
-    padding: 3rem;
-    border-radius: 8px;
-    border: 1px solid var(--color-borde);
-    text-align: center;
-}
-
-/* Icono de Confirmación (Tamaño Reducido) */
-.confirmacion-icono svg {
-    width: 60px; /* Reducimos el tamaño */
-    height: 60px;
-    color: #28a745; 
-}
-
-.confirmacion-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.confirmacion-container p {
-    font-size: 1.1rem;
-    color: #6c757d;
-    margin-bottom: 2.5rem; /* Aumentamos el espacio */
-}
-
-/* Contenedor de Acciones (Botones) */
-.confirmacion-acciones {
-    display: flex; /* Usamos Flexbox para alinear */
-    justify-content: center; /* Centramos los botones */
-    gap: 1rem; /* Espacio entre botones */
-}
-
-/* Estilo Base para TODOS los Botones */
-.boton {
-    padding: 0.8rem 1.6rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    border: 2px solid transparent;
-}
-
-/* Botón Primario */
-.boton-primario {
-    background-color: var(--color-primario);
-    color: white;
-    border-color: var(--color-primario);
-}
-.boton-primario:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-/* Botón Secundario (Nuevo diseño "outline") */
-.boton-secundario {
-    background-color: transparent;
-    color: var(--color-primario);
-    border-color: var(--color-primario);
-}
-.boton-secundario:hover {
-    background-color: var(--color-primario);
-    color: white;
-}
-
-/* --- Estilos de Cabecera de Página --- */
-.pagina-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-/* --- Estilos para la Sección de Recientes --- */
-.contenido-principal h3 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--color-borde);
-    padding-bottom: 0.5rem;
-}
-
-.recientes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.reciente-card {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid var(--color-borde);
-    font-weight: 500;
-}
-
-/* --- Estilos para Acciones de Formulario --- */
-.formulario-acciones {
-    display: flex;
-    justify-content: space-between; /* Alinea los botones a los extremos */
-    align-items: center;
-    margin-top: 1rem;
-}
-
-.acciones-grupo-izquierda {
-    display: flex;
-    gap: 1rem; /* Espacio entre el botón Guardar y Cancelar */
-}
-
-/* --- Estilos para Página de Confirmación de Borrado --- */
-.confirmacion-icono-alerta svg {
-    width: 60px;
-    height: 60px;
-    color: #dc3545; /* Rojo de alerta/borrado */
-}
-
-.alerta-permanente {
-    font-weight: bold;
-    color: #dc3545;
-}
-
-/* --- Estilos para Formulario de Graduación --- */
-.formulario-graduacion {
-    display: grid;
-    grid-template-columns: 60px 1fr 1fr 1fr 1fr;
-    gap: 1rem 1.5rem;
+.formulario-acciones { 
+    display: flex; 
+    justify-content: space-between; 
     align-items: center; 
 }
-
-.formulario-graduacion .campo-full-width {
-    grid-column: 1 / -1;
-}
-
-.formulario-graduacion .graduacion-ojo {
-    font-size: 1.5rem; /* Reducimos el tamaño de OD y OI */
-    font-weight: bold;
-    text-align: right;
-}
-
-.formulario-graduacion label {
-    font-weight: normal;
-    font-size: 1rem; /* Aumentamos el tamaño de las etiquetas (Esfera, Cilindro, etc.) */
-}
-
-/* --- Estilos para Acciones de Graduación en Tabla --- */
-.acciones-verticales {
-    vertical-align: middle; /* Centra verticalmente el contenido */
-    text-align: center; /* Centra horizontalmente el contenido */
-}
-
-.acciones-grupo {
-    display: inline-flex; /* Usa inline-flex para que el contenedor se ajuste a los botones */
-    gap: 0.5rem;
-}
-
-.acciones-verticales .boton,
-.acciones-verticales .boton-borrar {
-    padding: 0.2rem 0.5rem;
-    font-size: 0.8rem;
-}
-
-.acciones-verticales form {
-    margin: 0;
-}
-
-/* --- Estilos para Valores de Graduación en Tabla --- */
-.graduacion-valores {
-    display: flex;
-    gap: 0.5rem; /* Espacio entre las cajas */
-}
-
-.graduacion-valores .valor {
-    display: inline-block;
-    min-width: 60px; /* Ancho mínimo de cada caja */
-    padding: 0.4rem;
-    border: 1px solid var(--color-borde);
-    border-radius: 4px;
-    text-align: center;
-    background-color: var(--color-fondo);
-}
-
-.th-valores-contenido {
-    display: flex;
-    justify-content: space-around;
-    width: 55%; /* El contenido ocupa el 70% del espacio */
-}
-
-/* --- Estilos para Formulario de Captura de Graduación --- */
-.formulario-graduacion-captura {
-    display: grid;
-    grid-template-columns: 60px 1fr; /* 2 columnas: etiqueta y cajas */
-    gap: 1rem;
-    align-items: center;
-}
-
-.formulario-graduacion-captura .campo-full-width {
-    grid-column: 1 / -1;
-}
-
-/* Ajusta los inputs para que se vean como las cajas */
-.formulario-graduacion-captura .graduacion-valores .valor {
-    width: 100%; /* El input ocupa el 100% de la caja */
-    max-width: 90px; /* Limita el ancho máximo de cada caja */
-    box-sizing: border-box; /* Asegura que el padding y borde no afecten el ancho */
-    font-size: 1.1rem; /* Aumenta el tamaño de la fuente */
-}
-
-.subtitulo-pagina {
-    font-size: 1.1rem;
-    color: #6c757d;
-    margin-top: -0.5rem; /* Reducimos el margen superior */
-    margin-bottom: 2rem;
+.acciones-grupo-izquierda { 
+    display: flex; 
+    gap: 1rem; 
 }
 
 /* --- Estilos para Agudeza Visual --- */
 .agudeza-visual-grupo {
     display: flex;
-    gap: 1rem; /* Espacio entre los campos */
+    gap: 1rem;
 }
-
 .av-campo {
-    flex-grow: 1; /* Permite que los campos crezcan por igual */
+    flex-grow: 1;
 }
-
 .av-campo select {
     width: 100%;
     padding: 0.75rem;
@@ -434,84 +173,198 @@ body {
     font-size: 1rem;
 }
 
-/* --- Estilos para Filtro Alfabético --- */
+/* ==========================================================================
+   5. Tablas
+   ========================================================================== */
+.tabla { width: 100%; border-collapse: collapse; font-size: 1.1rem; }
+.tabla th, .tabla td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-borde); text-align: left; vertical-align: middle; }
+.tabla th:last-child, .tabla td:last-child { text-align: center; }
+
+/* ==========================================================================
+   6. Componentes Específicos
+   ========================================================================== */
+
+   /* Detalle de Paciente */
+.paciente-titulo {
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+.detalle-paciente-container {
+    background-color: var(--color-blanco);
+    padding: 2rem;
+    border-radius: 8px;
+}
+.detalle-seccion h3 {
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+.detalle-seccion { 
+    margin-bottom: 2rem; 
+}
+.detalle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Vuelve a 3 columnas */
+    gap: 1rem;
+}
+.detalle-grid div { font-size: 1.1rem; }
+.detalle-grid div strong { display: block; color: var(--color-secundario); font-size: 0.9rem; margin-bottom: 0.25rem; }
+.detalle-acciones { display: flex; gap: 1rem; padding-bottom: 1.5rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--color-borde); }
+
+   /* Widgets del Dashboard */
+.dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.widget {
+    background-color: var(--color-blanco);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-borde);
+}
+.widget__numero { font-size: 2rem; font-weight: bold; color: var(--color-primario); }
+.widget-accion { border-left: 5px solid var(--color-aviso); }
+.widget-accion h4 { font-size: 1rem; margin-bottom: 1rem; }
+
+/* Filtro Alfabético */
 .filtro-alfabetico {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    background-color: white;
     padding: 1rem;
+    background-color: var(--color-blanco);
     border-radius: 8px;
-    border: 1px solid var(--color-borde);
 }
-
 .filtro-alfabetico a {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 36px;
     height: 36px;
-    border: 1px solid var(--color-borde);
     border-radius: 4px;
     text-decoration: none;
     color: var(--color-primario);
     font-weight: bold;
-    transition: background-color 0.2s, color 0.2s;
 }
+.filtro-alfabetico a.activo { background-color: var(--color-primario); color: var(--color-blanco); }
 
-.filtro-alfabetico a:hover {
-    background-color: #e9ecef;
+/* Confirmaciones */
+.confirmacion-container {
+    margin-top: 2rem;
+    background-color: var(--color-blanco);
+    padding: 3rem;
+    border-radius: 8px;
+    text-align: center;
 }
+.confirmacion-icono svg { width: 60px; height: 60px; color: var(--color-exito); }
+.confirmacion-icono-alerta svg { width: 60px; height: 60px; color: var(--color-peligro); }
+.confirmacion-acciones { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+.confirmacion-acciones form { margin: 0; }
 
-.filtro-alfabetico a.activo {
-    background-color: var(--color-primario);
-    color: white;
-    border-color: var(--color-primario);
-}
-
-/* --- Estilos para Botones de Acciones Pequeños (en tablas) --- */
-.boton.boton-ver,
-.boton.boton-editar,
-.boton.boton-borrar {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
-    margin-right: 4px;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-.boton-ver {
-    background-color: #17a2b8; /* Azul turquesa */
-}
-
-.boton-editar {
-    background-color: #28a745; /* Verde */
-}
-
-.boton-borrar {
-    background-color: #dc3545; /* Rojo */
-}
-
-/* --- Estilos UNIFICADOS para Contenedores de Acciones --- */
-.confirmacion-acciones,
-.formulario-acciones {
+/* Graduaciones en Detalle */
+.graduacion-fila {
     display: flex;
-    justify-content: center;
     align-items: center;
+    background-color: var(--color-fondo);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+.graduacion-columna-tipo { flex-basis: 250px; flex-shrink: 0; font-size: 1.1rem; padding-right: 1rem; }
+.graduacion-columna-formulas { /* No necesita reglas */ }
+.graduacion-columna-acciones { display: flex; justify-content: flex-end; gap: 0.5rem; flex-basis: 200px; }
+
+.graduacion-formula .valor {
+    display: inline-block;
+    min-width: 50px;
+    padding: 0.4rem;
+    text-align: center;
+    background-color: var(--color-blanco);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* --- Estilos para Calculadora de Fecha --- */
+.calculadora-fecha {
+    grid-column: 1 / -1;
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.calculadora-fecha h4 {
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem; /* Tamaño de fuente normal */
+}
+
+.calculadora-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto; /* Tres columnas */
     gap: 1rem;
+    align-items: center;
 }
 
-.confirmacion-acciones form,
-.formulario-acciones form {
-    margin: 0;
-    display: contents; /* Esta es la línea clave */
+.calculadora-inputs input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
-.acciones-grupo-izquierda {
+/* --- Estilos para Formulario de Captura de Graduación --- */
+.formulario-graduacion-captura {
+    display: grid;
+    grid-template-columns: 70px 1fr; /* 2 columnas: etiqueta y cajas */
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.formulario-graduacion-captura .campo-full-width {
+    grid-column: 1 / -1;
+}
+
+.formulario-graduacion-captura .graduacion-ojo-label {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.formulario-graduacion-captura .graduacion-valores {
+    display: flex;
+    gap: 0.8rem;
+    min-height: 2.5rem;
+    min-width: 3rem;
+}
+
+.formulario-graduacion-captura .graduacion-valores .valor {
+    width: 100%;
+    max-width: 70px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.campo-tipo-graduacion label {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* --- Estilos para Formulario de Búsqueda --- */
+.formulario-busqueda {
     display: flex;
     gap: 1rem;
 }
 
-/* En la página de confirmación no he encontrado la falla que hace que un boton sea más grande que el otro, queda pendiente */
+.formulario-busqueda input[type="search"] {
+    flex-grow: 1; /* El campo de texto ocupa el espacio disponible */
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 1rem;
+}

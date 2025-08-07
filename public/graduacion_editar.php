@@ -64,8 +64,8 @@ require_once '../src/layouts/sidebar.php';
 
             <div class="formulario-acciones campo-full-width">
                 <div class="acciones-grupo-izquierda">
-                    <button type="submit" class="boton boton-primario">Actualizar Graduación</button>
-                    <a href="/consulta_detalle.php?id_consulta=<?php echo $graduacion['id_consulta']; ?>&id_paciente=<?php echo $id_paciente; ?>" class="boton boton-secundario">Cancelar</a>
+                    <button type="submit" class="boton boton--primario">Actualizar Graduación</button>
+                    <a href="/consulta_detalle.php?id_consulta=<?php echo $graduacion['id_consulta']; ?>&id_paciente=<?php echo $id_paciente; ?>" class="boton boton--secundario">Cancelar</a>
                 </div>
             </div>
         </form>

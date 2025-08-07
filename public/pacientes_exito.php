@@ -1,4 +1,7 @@
 <?php
+// Obtenemos el ID del paciente desde la URL para usarlo en los botones
+$id_paciente = $_GET['id'] ?? 0;
+
 require_once '../src/layouts/header.php';
 require_once '../src/layouts/sidebar.php';
 ?>
@@ -13,9 +16,9 @@ require_once '../src/layouts/sidebar.php';
         <h2>¡Paciente Registrado Exitosamente!</h2>
         <p>El registro del paciente ha sido guardado en la base de datos.</p>
         <div class="confirmacion-acciones">
-            <a href="/pacientes_nuevo.php" class="boton boton-primario">Registrar Nuevo Paciente</a>
-            <a href="/pacientes.php" class="boton boton-secundario">Pacientes</a>
-            <a href="/index.php" class="boton boton-secundario">Regresar al Inicio</a>
+            <a href="/pacientes_nuevo.php" class="boton boton--primario">Registrar Nuevo Paciente</a>
+            <a href="/pacientes.php" class="boton boton--secundario">Ver Lista de Pacientes</a>
+            <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--info">Consulta</a>
         </div>
     </div>
 </main>

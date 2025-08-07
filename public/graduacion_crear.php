@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_paciente = $_POST['id_paciente']; // Para la redirección
     $tipo_graduacion = $_POST['tipo_graduacion'];
     $od_esfera = $_POST['od_esfera'] ?? null;
-    $od_cilindro = $_POST['od_cilindro'] ?? null;
-    $od_eje = $_POST['od_eje'] ?? null;
+    $od_cilindro = !empty($_POST['od_cilindro']) ? $_POST['od_cilindro'] : 0;
+    $od_eje = !empty($_POST['od_eje']) ? $_POST['od_eje'] : 0;
     $od_add = !empty($_POST['od_add']) ? $_POST['od_add'] : 0;
     $oi_esfera = $_POST['oi_esfera'] ?? null;
-    $oi_cilindro = $_POST['oi_cilindro'] ?? null;
-    $oi_eje = $_POST['oi_eje'] ?? null;
+    $oi_cilindro = !empty($_POST['oi_cilindro']) ? $_POST['oi_cilindro'] : 0;
+    $oi_eje = !empty($_POST['oi_eje']) ? $_POST['oi_eje'] : 0;
     $oi_add = !empty($_POST['oi_add']) ? $_POST['oi_add'] : 0;
     
     // Preparar y ejecutar la consulta SQL

@@ -5,6 +5,14 @@ require_once '../src/layouts/sidebar.php';
 
 <main class="contenido-principal">
     <h2>Registrar Nuevo Paciente</h2>
+    <div class="calculadora-fecha">
+        <h4>Calculadora de Fecha de Nacimiento (para expedientes antiguos)</h4>
+        <div class="calculadora-inputs">
+            <input type="number" id="edad_historica" placeholder="Edad del Paciente">
+            <input type="number" id="ano_expediente" placeholder="Año del Expediente">
+            <button type="button" id="btn_calcular_fecha" class="boton boton--secundario boton--sm">Calcular</button>
+        </div>
+    </div>
     <div class="formulario-container">
         <form action="/pacientes_crear.php" method="POST" class="formulario-grid">
             <div class="campo">
@@ -56,8 +64,11 @@ require_once '../src/layouts/sidebar.php';
                 <textarea id="antecedentes_descripcion" name="antecedentes_descripcion" rows="3"></textarea>
             </div>
 
-            <div class="campo campo-full-width">
-                <button type="submit" class="boton boton-primario">Guardar Paciente</button>
+            <div class="formulario-acciones campo-full-width">
+                <div class="acciones-grupo-izquierda">
+                    <button type="submit" class="boton boton--primario">Guardar Paciente</button>
+                    <a href="/pacientes.php" class="boton boton--secundario">Cancelar</a>
+                </div>
             </div>
         </form>
     </div>

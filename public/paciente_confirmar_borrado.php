@@ -8,17 +8,12 @@ if (!$id) {
     exit();
 }
 
-// Buscar el nombre completo del paciente para mostrarlo
+// Buscar el nombre del paciente para mostrarlo en el mensaje
 $stmt = $pdo->prepare("SELECT nombres, apellido_paterno, apellido_materno FROM pacientes WHERE id_paciente = ?");
 $stmt->execute([$id]);
 $paciente = $stmt->fetch();
-
-if (!$paciente) {
-    header('Location: /pacientes.php');
-    exit();
-}
-
 $nombre_completo = trim($paciente['nombres'] . ' ' . $paciente['apellido_paterno'] . ' ' . $paciente['apellido_materno']);
+
 
 require_once '../src/layouts/header.php';
 require_once '../src/layouts/sidebar.php';
@@ -38,9 +33,9 @@ require_once '../src/layouts/sidebar.php';
         <div class="confirmacion-acciones">
             <form action="/pacientes_borrar.php" method="POST">
                 <input type="hidden" name="id_paciente" value="<?php echo $id; ?>">
-                <button type="submit" class="boton boton-borrar">Sí, Eliminar</button>
+                <button type="submit" class="boton boton--peligro">Sí, Eliminar</button>
             </form>
-            <a href="/pacientes.php" class="boton boton-secundario">Cancelar</a>
+            <a href="/paciente_detalle.php?id=<?php echo $id; ?>" class="boton boton--secundario">Cancelar</a>
         </div>
     </div>
 </main>

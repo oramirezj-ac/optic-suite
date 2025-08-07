@@ -72,10 +72,10 @@ require_once '../src/layouts/sidebar.php';
             
             <div class="formulario-acciones campo-full-width">
                 <div class="acciones-grupo-izquierda">
-                    <button type="submit" class="boton boton-primario">Guardar Cambios</button>
-                    <a href="/pacientes.php" class="boton boton-secundario">Cancelar</a>
+                    <button type="submit" class="boton boton--primario">Guardar Cambios</button>
+                    <a href="/paciente_detalle.php?id=<?php echo htmlspecialchars($paciente['id_paciente']); ?>" class="boton boton--secundario">Cancelar</a>
                 </div>
-                <a href="/paciente_confirmar_borrado.php?id=<?php echo htmlspecialchars($paciente['id_paciente']); ?>" class="boton boton-borrar">Eliminar Paciente</a>
+                <a href="/paciente_confirmar_borrado.php?id=<?php echo htmlspecialchars($paciente['id_paciente']); ?>" class="boton boton--peligro">Eliminar Paciente</a>
             </div>
         </form>
     </div>

@@ -33,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $dnp_oi
     ]);
 
-    header("Location: /pacientes_exito.php");
+    // Obtenemos el ID del paciente recién creado
+    $id_nuevo_paciente = $pdo->lastInsertId();
+
+    // Redirigimos a la página de éxito, pasando el nuevo ID
+    header("Location: /pacientes_exito.php?id=" . $id_nuevo_paciente);
     exit();
 }

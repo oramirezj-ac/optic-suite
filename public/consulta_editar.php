@@ -78,8 +78,8 @@ require_once '../src/layouts/sidebar.php';
 
             <div class="formulario-acciones campo-full-width">
                 <div class="acciones-grupo-izquierda">
-                    <button type="submit" class="boton boton-primario">Actualizar Consulta</button>
-                    <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton-secundario">Cancelar</a>
+                    <button type="submit" class="boton boton--primario">Actualizar Consulta</button>
+                    <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario">Cancelar</a>
                 </div>
             </div>
         </form>

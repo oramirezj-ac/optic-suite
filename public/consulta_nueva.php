@@ -82,8 +82,8 @@ require_once '../src/layouts/sidebar.php';
             </div>
 
             <div class="formulario-acciones campo-full-width">
-                <button type="submit" class="boton boton-primario">Guardar Consulta</button>
-                <a href="/consulta_historial.php?id=<?php echo htmlspecialchars($id_paciente); ?>" class="boton boton-secundario">Cancelar</a>
+                <button type="submit" class="boton boton--primario">Guardar Consulta</button>
+                <a href="/consulta_historial.php?id=<?php echo htmlspecialchars($id_paciente); ?>" class="boton boton--secundario">Cancelar</a>
             </div>
         </form>
     </div>

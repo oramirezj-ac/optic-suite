@@ -36,9 +36,9 @@ require_once '../src/layouts/sidebar.php';
             <form action="/consulta_borrar.php" method="POST">
                 <input type="hidden" name="id_consulta" value="<?php echo $id_consulta; ?>">
                 <input type="hidden" name="id_paciente" value="<?php echo $id_paciente; ?>">
-                <button type="submit" class="boton boton-borrar">Sí, Eliminar</button>
+                <button type="submit" class="boton boton--peligro">Sí, Eliminar</button>
             </form>
-            <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton-secundario">Cancelar</a>
+            <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario">Cancelar</a>
         </div>
     </div>
 </main>
