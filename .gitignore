@@ -1,20 +1,67 @@
-# Obsidian
-# Ignora la carpeta de configuración personal de tu bóveda de documentación.
+# Environment Configuration
+.env
+.env.local
+.env.production
+.env.backup
+
+# Dependencies
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+
+# Build artifacts
+/public/build/
+/public/mix-manifest.json
+/public/hot
+
+# Cache and temporary files
+/storage/cache/
+/storage/logs/
+/storage/sessions/
+/tmp/
+*.log
+*.cache
+
+# Database
+*.sqlite
+*.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation
 docs/.obsidian/
 
-# Dependencias de PHP (Composer)
-# Si en el futuro usas Composer, esto ignorará la carpeta de librerías.
-/vendor/
+# Upload directories (configurar según necesidad)
+/public/uploads/
+/storage/uploads/
 
-# Dependencias de JavaScript (Node.js)
-# Si en el futuro usas herramientas de JS, esto ignorará los paquetes.
-/node_modules/
+# Backup files
+*.bak
+*.backup
+*.old
 
-# Archivo de Entorno
-# Contendrá contraseñas de la base de datos y otras claves. ¡NUNCA debe subirse!
-.env
+# Testing
+/coverage/
+.phpunit.result.cache
 
-# Archivos de Sistema Operativo y Editor
-.DS_Store
-Thumbs.db
-.vscode/
+# Security
+private.key
+*.pem
+*.crt
