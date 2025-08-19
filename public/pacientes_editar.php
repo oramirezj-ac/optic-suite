@@ -11,12 +11,23 @@ $stmt = $pdo->prepare("SELECT * FROM pacientes WHERE id_paciente = ?");
 $stmt->execute([$id]);
 $paciente = $stmt->fetch();
 
+/* Preparamos el nombre completo para mostrarlo en el título */
+$nombre_completo = trim($paciente['nombres'] . ' ' . $paciente['apellido_paterno'] . ' ' . $paciente['apellido_materno']);
+
 require_once '../src/layouts/header.php';
 require_once '../src/layouts/sidebar.php';
 ?>
 
 <main class="contenido-principal">
-    <h2>Editar Paciente: <?php echo htmlspecialchars($paciente['nombres'] . ' ' . $paciente['apellido_paterno'] . ' ' . $paciente['apellido_materno']); ?></h2>
+    <div class="pagina-header">
+        <h2>Editar Paciente</h2>
+        <a href="/paciente_detalle.php?id=<?php echo htmlspecialchars($paciente['id_paciente']); ?>" class="boton boton--secundario boton--md">&larr; Regresar al Detalle</a>
+    </div>
+
+    <div class="paciente-titulo">
+        <h3><?php echo htmlspecialchars($nombre_completo); ?></h3>
+    </div>
+    
     <div class="formulario-container">
         <form action="/pacientes_actualizar.php" method="POST" class="formulario-grid">
             <input type="hidden" name="id_paciente" value="<?php echo htmlspecialchars($paciente['id_paciente']); ?>">

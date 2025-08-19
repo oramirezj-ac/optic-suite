@@ -31,11 +31,14 @@ $sql_graduacion = "
 $stmt_graduacion = $pdo->prepare($sql_graduacion);
 $stmt_graduacion->execute([$id_paciente]);
 $ultima_graduacion = $stmt_graduacion->fetch();
-$fecha_formateada = '';
-if ($ultima_graduacion) {
-    $formatter = new IntlDateFormatter('es_MX', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
-    $fecha_formateada = $formatter->format(strtotime($ultima_graduacion['fecha_consulta']));
-}
+
+// 3. Buscar la última venta del paciente
+$stmt_venta = $pdo->prepare("SELECT * FROM ventas WHERE id_paciente = ? ORDER BY fecha_venta DESC LIMIT 1");
+$stmt_venta->execute([$id_paciente]);
+$ultima_venta = $stmt_venta->fetch();
+
+// Formateador de fecha
+$formatter = new IntlDateFormatter('es_MX', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
 
 require_once '../src/layouts/header.php';
 require_once '../src/layouts/sidebar.php';
@@ -53,10 +56,15 @@ require_once '../src/layouts/sidebar.php';
 
     <div class="detalle-paciente-container">
         <div class="detalle-acciones">
-            <a href="/consulta_nueva.php?id_paciente=<?php echo $id_paciente; ?>" class="boton boton--primario boton--md">+ Consulta Nueva</a>
-            <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario boton--md">Ver Historial</a>
-            <a href="/pacientes_editar.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario boton--md">Editar Paciente</a>
-            <a href="/paciente_confirmar_borrado.php?id=<?php echo $id_paciente; ?>" class="boton boton--peligro boton--md">Eliminar Paciente</a>
+            <div class="acciones-grupo-izquierda">
+                <a href="/consulta_nueva.php?id_paciente=<?php echo $id_paciente; ?>" class="boton boton--primario boton--md">+ Consulta Nueva</a>
+                <a href="/consulta_historial.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario boton--md">Ver Historial</a>
+                <a href="/pacientes_editar.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario boton--md">Editar Paciente</a>
+                <a href="/paciente_confirmar_borrado.php?id=<?php echo $id_paciente; ?>" class="boton boton--peligro boton--md">Eliminar Paciente</a>
+            </div>
+            <div class="acciones-grupo-derecha">
+                <a href="/venta_nueva.php?id_paciente=<?php echo $id_paciente; ?>" class="boton boton--venta boton--md">+ Nueva Venta</a>
+            </div>
         </div>
 
         <div class="detalle-seccion">
@@ -87,39 +95,62 @@ require_once '../src/layouts/sidebar.php';
                 </div>
             </div>
         </div>
-
-        <div class="detalle-seccion seccion-graduacion">
-    <h3>Última Graduación</h3>
-    <?php if ($ultima_graduacion): ?>
-        <p>Fecha de la consulta: <strong><?php echo ucfirst(htmlspecialchars($fecha_formateada)); ?></strong></p>
         
-        <div class="graduacion-formula-container">
-            <div class="graduacion-formula">
-                <span class="graduacion-ojo-label">OD</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_esfera']); ?></span>
-                <span class="simbolo">=</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_cilindro']); ?></span>
-                <span class="simbolo">x</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_eje']); ?></span>
-                <span class="simbolo">°</span>
-                <span class="valor valor-add"><?php echo htmlspecialchars($ultima_graduacion['od_add']); ?></span>
-            </div>
-            <div class="graduacion-formula">
-                <span class="graduacion-ojo-label">OI</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_esfera']); ?></span>
-                <span class="simbolo">=</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_cilindro']); ?></span>
-                <span class="simbolo">x</span>
-                <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_eje']); ?></span>
-                <span class="simbolo">°</span>
-                <span class="valor valor-add"><?php echo htmlspecialchars($ultima_graduacion['oi_add']); ?></span>
-            </div>
+        <div class="detalle-seccion">
+            <h3>Última Venta</h3>
+            <?php if ($ultima_venta): ?>
+                <div class="detalle-grid">
+                    <div>
+                        <strong># Nota:</strong>
+                        <span><?php echo htmlspecialchars($ultima_venta['numero_nota']); ?></span>
+                    </div>
+                    <div>
+                        <strong>Fecha:</strong>
+                        <span><?php echo ucfirst($formatter->format(strtotime($ultima_venta['fecha_venta']))); ?></span>
+                    </div>
+                    <div>
+                        <strong>Monto:</strong>
+                        <span>$<?php echo number_format($ultima_venta['costo_total'], 2); ?></span>
+                    </div>
+                </div>
+                <div class="detalle-venta-acciones">
+                    <a href="/venta_detalle.php?id=<?php echo $ultima_venta['id_venta']; ?>" class="boton boton--info boton--sm">Ver Detalle de la Venta</a>
+                </div>
+            <?php else: ?>
+                <p>No se encontraron ventas para este paciente.</p>
+            <?php endif; ?>
         </div>
 
-    <?php else: ?>
-        <p>No se encontró una graduación final para este paciente.</p>
-    <?php endif; ?>
-</div>
+        <div class="detalle-seccion seccion-graduacion">
+            <h3>Última Graduación</h3>
+            <?php if ($ultima_graduacion): ?>
+                <p>Fecha de la consulta: <strong><?php echo ucfirst($formatter->format(strtotime($ultima_graduacion['fecha_consulta']))); ?></strong></p>
+                <div class="graduacion-formula-container">
+                    <div class="graduacion-formula">
+                        <span class="graduacion-ojo-label">OD</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_esfera']); ?></span>
+                        <span class="simbolo">=</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_cilindro']); ?></span>
+                        <span class="simbolo">x</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['od_eje']); ?></span>
+                        <span class="simbolo">°</span>
+                        <span class="valor valor-add"><?php echo htmlspecialchars($ultima_graduacion['od_add']); ?></span>
+                    </div>
+                    <div class="graduacion-formula">
+                        <span class="graduacion-ojo-label">OI</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_esfera']); ?></span>
+                        <span class="simbolo">=</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_cilindro']); ?></span>
+                        <span class="simbolo">x</span>
+                        <span class="valor"><?php echo htmlspecialchars($ultima_graduacion['oi_eje']); ?></span>
+                        <span class="simbolo">°</span>
+                        <span class="valor valor-add"><?php echo htmlspecialchars($ultima_graduacion['oi_add']); ?></span>
+                    </div>
+                </div>
+            <?php else: ?>
+                <p>No se encontró una graduación final para este paciente.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </main>
 

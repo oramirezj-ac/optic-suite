@@ -99,6 +99,16 @@ body {
 .boton--exito { background-color: var(--color-exito); border-color: var(--color-exito); color: var(--color-blanco); }
 .boton--info { background-color: var(--color-info); border-color: var(--color-info); color: var(--color-blanco); }
 
+.boton--venta {
+    background-color: #1fce89;
+    border-color: #1fce89;
+    color: var(--color-blanco);
+}
+.boton--venta:hover {
+    background-color: #1dbc9b;
+    border-color: #1dbc9b;
+}
+
 .boton--sm {
     padding: 0.4rem 0.8rem;
     font-size: 0.85rem;
@@ -273,7 +283,7 @@ body {
     border-radius: 8px;
 }
 .graduacion-columna-tipo { flex-basis: 250px; flex-shrink: 0; font-size: 1.1rem; padding-right: 1rem; }
-.graduacion-columna-formulas { /* No necesita reglas */ }
+/*.graduacion-columna-formulas {  No necesita reglas  } */
 .graduacion-columna-acciones { display: flex; justify-content: flex-end; gap: 0.5rem; flex-basis: 200px; }
 
 .graduacion-formula .valor {
@@ -367,4 +377,46 @@ body {
     border: 1px solid var(--color-borde);
     border-radius: 5px;
     font-size: 1rem;
+}
+
+.acciones-grupo-derecha {
+    display: flex;
+    gap: 1rem;
+    margin-left: 5rem;
+}
+
+.abonos-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.abonos-form h4 {
+    margin-bottom: 1rem;
+}
+
+.detalle-venta-acciones {
+    margin-top: 1rem;
+}
+
+.widget .boton {
+    margin-top: 1rem; /* Añade espacio superior al botón dentro de un widget */
+}
+
+/* --- Estilos para Formulario Vertical (Abonos) --- */
+.formulario-vertical .campo {
+    margin-bottom: 1.5rem; /* Separa las filas */
+}
+
+.formulario-vertical input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.formulario-vertical label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
 }

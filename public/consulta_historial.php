@@ -38,11 +38,15 @@ require_once '../src/layouts/sidebar.php';
 
 <main class="contenido-principal">
     <div class="pagina-header">
-        <h2>Historial de: <?php echo htmlspecialchars($nombre_completo); ?></h2>
+        <h2>Historial de Consultas</h2>
         <div class="acciones-grupo-izquierda">
-            <a href="/paciente_detalle.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario">Regresar</a>
-            <a href="/consulta_nueva.php?id_paciente=<?php echo $id_paciente; ?>" class="boton boton--primario">+ Nueva Consulta</a>
+            <a href="/paciente_detalle.php?id=<?php echo $id_paciente; ?>" class="boton boton--secundario boton--md">Regresar</a>
+            <a href="/consulta_nueva.php?id_paciente=<?php echo $id_paciente; ?>" class="boton boton--primario boton--md">+ Nueva Consulta</a>
         </div>
+    </div>
+
+    <div class="paciente-titulo">
+        <h3><?php echo htmlspecialchars($nombre_completo); ?></h3>
     </div>
 
     <div class="tabla-container">

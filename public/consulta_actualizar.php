@@ -32,6 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_consulta
     ]);
 
-    header("Location: /consulta_historial.php?id=" . $id_paciente . "&status=updated");
+    header("Location: /consulta_detalle.php?id_consulta=" . $id_consulta . "&id_paciente=" . $id_paciente . "&status=updated");
     exit();
 }

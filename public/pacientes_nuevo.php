@@ -1,10 +1,17 @@
 <?php
+require_once '../src/database.php';
+
+// Obtener listas de apellidos existentes para el autocompletado
+$apellidos_paternos = $pdo->query("SELECT DISTINCT apellido_paterno FROM pacientes WHERE apellido_paterno IS NOT NULL AND apellido_paterno != '' ORDER BY apellido_paterno")->fetchAll(PDO::FETCH_COLUMN);
+$apellidos_maternos = $pdo->query("SELECT DISTINCT apellido_materno FROM pacientes WHERE apellido_materno IS NOT NULL AND apellido_materno != '' ORDER BY apellido_materno")->fetchAll(PDO::FETCH_COLUMN);
+
 require_once '../src/layouts/header.php';
 require_once '../src/layouts/sidebar.php';
 ?>
 
 <main class="contenido-principal">
     <h2>Registrar Nuevo Paciente</h2>
+    
     <div class="calculadora-fecha">
         <h4>Calculadora de Fecha de Nacimiento (para expedientes antiguos)</h4>
         <div class="calculadora-inputs">
@@ -13,6 +20,7 @@ require_once '../src/layouts/sidebar.php';
             <button type="button" id="btn_calcular_fecha" class="boton boton--secundario boton--sm">Calcular</button>
         </div>
     </div>
+    
     <div class="formulario-container">
         <form action="/pacientes_crear.php" method="POST" class="formulario-grid">
             <div class="campo">
@@ -21,11 +29,11 @@ require_once '../src/layouts/sidebar.php';
             </div>
             <div class="campo">
                 <label for="apellido_paterno">Apellido Paterno:</label>
-                <input type="text" id="apellido_paterno" name="apellido_paterno">
+                <input type="text" id="apellido_paterno" name="apellido_paterno" list="lista_apellidos_paternos">
             </div>
             <div class="campo">
                 <label for="apellido_materno">Apellido Materno:</label>
-                <input type="text" id="apellido_materno" name="apellido_materno">
+                <input type="text" id="apellido_materno" name="apellido_materno" list="lista_apellidos_maternos">
             </div>
 
             <div class="campo">
@@ -73,5 +81,17 @@ require_once '../src/layouts/sidebar.php';
         </form>
     </div>
 </main>
+
+<datalist id="lista_apellidos_paternos">
+    <?php foreach ($apellidos_paternos as $apellido): ?>
+        <option value="<?php echo htmlspecialchars($apellido); ?>">
+    <?php endforeach; ?>
+</datalist>
+
+<datalist id="lista_apellidos_maternos">
+    <?php foreach ($apellidos_maternos as $apellido): ?>
+        <option value="<?php echo htmlspecialchars($apellido); ?>">
+    <?php endforeach; ?>
+</datalist>
 
 <?php require_once '../src/layouts/footer.php'; ?>

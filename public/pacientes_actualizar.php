@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombres = $_POST['nombres'] ?? '';
     $apellido_paterno = $_POST['apellido_paterno'] ?? '';
     $apellido_materno = $_POST['apellido_materno'] ?? '';
-    $fecha_nacimiento = $_POST['fecha_nacimiento'] ?? null;
+    $fecha_nacimiento = !empty($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : null;
     $telefono = $_POST['telefono'] ?? '';
     $domicilio = $_POST['domicilio'] ?? '';
     $email = $_POST['email'] ?? '';
@@ -46,6 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id
     ]);
 
-    header("Location: /pacientes.php?status=updated");
+    header("Location: /paciente_detalle.php?id=" . $id . "&status=updated");
     exit();
 }
